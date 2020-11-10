@@ -39,20 +39,15 @@ describe("login saga effects", () => {
     const credentials = { user: "ste", password: "admin" };
     const authorizeForkMock = createMockTask();
     let value;
-
     beforeAll(() => {
       // send the generator straight to the LOGIN_ERROR management
       gen.next();
       gen.next(credentials);
       gen.next(authorizeForkMock);
-      value = gen.next({ type: "LOGIN_ERROR" });
     });
 
-    test("if a LOGIN_ERROR action happens it doesn't cancel the authorize task (because it's the authorize task itself that triggers the LOGIN_ERROR action)", () => {
-      expect(value).not.toEqual(cancel(authorizeForkMock));
-    });
-    test("neither it triggers a DELETE_TOKEN action", () => {
-      expect(value).not.toEqual(put({ type: "DELETE_TOKEN" }));
+    test("Login error occurred", () => {
+      expect(gen.throw(new Error('error occurred when logged in')).value).toEqual(put({ type: "LOGIN_ERROR" }));
     });
   });
 });
@@ -84,7 +79,7 @@ describe("authorize saga effects", () => {
   });
 
   describe("external cancellation", () => {
-    beforeAll(function() {
+    beforeAll(function () {
       // send the generator straight to the cencelled() check
       gen = authorize(credentials.user, credentials.password);
       gen.next();

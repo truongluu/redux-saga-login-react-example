@@ -1,4 +1,5 @@
 # redux-saga-login-react-example
+
 The redux-saga login example with a super-essential UI, unit tests and E2E tests.
 
 The Redux Saga library reports an interesting example on the docs, a complete login process.
@@ -7,24 +8,27 @@ You can find it [here](https://redux-saga.js.org/docs/advanced/NonBlockingCalls.
 Since it's my first touch with the generators I wrote the tests for every flow expected by the example itself.
 
 How to tun the unit tests
+
 ```
 $ npm install
 $ npm test
 ```
+
 and if you want to see the E2E tests running
+
 ```
 $ npm install
-$ npm run dev
+$ npm run dev:test
 # in another window
-$ npm run start
-# in another window too
 $ npm run test:e2e
 ```
 
 If you haven't the [Redux DevTools](https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd?hl=it) installed don't worry, every action dispatched is logged into the console.
 
 # Test outputs
+
 ## Unit tests
+
 ```
  PASS  src/sagas/index.test.js
   login saga effects
@@ -55,7 +59,9 @@ Snapshots:   0 total
 Time:        1.613s
 
 ```
+
 ## E2E tests
+
 ```
  PASS  test/login-saga.e2e.test.js
   login saga effects, e2e tests
@@ -70,19 +76,19 @@ Time:        2.783s, estimated 4s
 ```
 
 If you want to see the E2E tests running with your eyes open the `login-saga.e2e.test.js` file and set `headless` to false (and `slowMo` to 250)
+
 ```javascript
 browser = await puppeteer.launch({
-    headless: true,
-    slowMo: 0,
-    devtools: true,
+  headless: true,
+  slowMo: 0,
+  devtools: true,
 });
 ```
 
-
 ### Differences between my code and the example's one
+
 - I added a simple `fakeAuthorize` method to simulate a real AJAX call
 - I added two actions: SAVE_TOKEN and DELETE_TOKEN
 - I move the token clearing into the `if (action.type === 'LOGOUT')` condition
-
 
 This project has been bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).

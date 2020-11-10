@@ -11,7 +11,7 @@ export default function configureStore() {
     applyMiddleware(sagaMiddleware),
     applyMiddleware(thunk),
   ];
-  if(window && window.__REDUX_DEVTOOLS_EXTENSION__) {
+  if (window && window.__REDUX_DEVTOOLS_EXTENSION__) {
     composeArgs.push(window.__REDUX_DEVTOOLS_EXTENSION__());
   }
 
